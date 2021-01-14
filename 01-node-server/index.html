@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            color: white;
+            background-color: black;
+        }
+        
+        img {
+            transition: all 0.5s;
+            margin: 10px;
+        }
+        
+        img:hover {
+            transform: rotate(20deg) scale(1.1);
+            border-radius: 50%;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="image">
+    </div>
+    <script>
+        const img = document.createElement('img');
+        img.src = "https://picsum.photos/500";
+        const div = document.querySelector('.image');
+        const heading = document.createElement('h1');
+        const heading2 = document.createElement('h2');
+        heading2.textContent = 'Pretty Exciting stuff!';
+        heading.textContent = 'I\'m hosting my own server using Node!';
+        const p = document.createElement('p');
+        p.textContent = 'Hover over the image';
+
+        img.onload = (event) => {
+            div.insertAdjacentElement('beforebegin', heading);
+            div.insertAdjacentElement('afterbegin', p);
+            div.insertAdjacentElement('beforeend', img);
+            div.insertAdjacentElement('afterend', heading2);
+        }
+    </script>
+</body>
+
+</html>
