@@ -1,0 +1,22 @@
+<h1>About Meadowlark Travel</h1>
+{{#if quote}}
+    <p>Your quote for the day is: </p>
+    <blockquote>{{quote}}</blockquote>
+{{/if}}
+
+<h2>Here's a few images to make your day beautiful!</h2>
+<div class="image-container">
+    <img src="https://picsum.photos/200" alt="cute photo">
+    <img src="https://picsum.photos/250" alt="cute photo">
+    <img src="https://picsum.photos/300" alt="cute photo">
+    <img src="https://picsum.photos/110" alt="cute photo">
+</div>
+<style>
+    .image-container {
+        display: flex;
+        height: 50vh;
+        align-items: center;
+        justify-content: space-around;
+        border: 4px solid goldenrod;
+    }
+</style>
