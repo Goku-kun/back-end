@@ -59,7 +59,7 @@ app.put("/contacts/:id", function updateContacts(req, res) {
     }
 });
 
-app.post("/contacts/", function addContact(req, res) {
+app.post("/contacts", function addContact(req, res) {
     if (req.query.hasOwnProperty("name") && req.query.hasOwnProperty("phone")) {
         var contactsJSON = fs.readFileSync("./contacts.json");
         var contacts = JSON.parse(contactsJSON);
