@@ -1,0 +1,1 @@
+curl -X PUT -H Content-Type: application/json http://localhost:3000/heroes/deku?name=deku&heroName=Saikyo%20no%20Hero&quirk=One%20for%20All
