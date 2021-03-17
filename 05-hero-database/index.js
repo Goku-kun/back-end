@@ -3,42 +3,47 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const fs = require("fs");
 
-var heroes = {
-    deku: {
-        name: "Midoriya Izuku",
-        heroName: "Deku",
-        quirk: "One for All",
-    },
-    lemillion: {
-        name: "Mirio Togata",
-        heroName: "Lemillion",
-        quirk: "Permeation",
-    },
-    allmight: {
-        name: "Yagi Toshinori",
-        heroName: "All Might",
-        quirk: "One for All",
-    },
-    eraserhead: {
-        name: "Aizawa Shota",
-        heroName: "Eraser Head",
-        quirk: "Erasure",
-    },
-    greatexplosionmurdergoddynamite: {
-        name: "Bakugo Katsuki",
-        heroName: "greatexplosionmurdergoddynamite",
-        quirk: "Explosion",
-    },
-};
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+//var heroes = {
+//deku: {
+//name: "Midoriya Izuku",
+//heroName: "Deku",
+//quirk: "One for All",
+//},
+//lemillion: {
+//name: "Mirio Togata",
+//heroName: "Lemillion",
+//quirk: "Permeation",
+//},
+//allmight: {
+//name: "Yagi Toshinori",
+//heroName: "All Might",
+//quirk: "One for All",
+//},
+//eraserhead: {
+//name: "Aizawa Shota",
+//heroName: "Eraser Head",
+//quirk: "Erasure",
+//},
+//greatexplosionmurdergoddynamite: {
+//name: "Bakugo Katsuki",
+//heroName: "greatexplosionmurdergoddynamite",
+//quirk: "Explosion",
+//},
+//};
 
 //fs.writeFileSync("./heroes.json", JSON.stringify(heroes));
 
 app.get("/heroes", function indexHandler(req, res) {
+    let heroes = fs.readFileSync("./heroes.json");
     res.set("Content-type", "text/json");
-    res.json(heroes);
+    res.end(heroes);
 });
 
 app.get("/heroes/:name", function heroNameHandler(req, res) {
+    let heroes = fs.readFileSync("./heroes.json");
+    heroes = JSON.parse(heroes);
     const heroDetails = heroes[req.params.name];
     if (heroDetails == undefined) {
         res.status(404);
@@ -52,11 +57,39 @@ app.get("/heroes/:name", function heroNameHandler(req, res) {
 });
 
 app.put("/heroes/:name", function putHero(req, res) {
+    let heroes = fs.readFileSync("./heroes.json");
+    heroes = JSON.parse(heroes);
+    if (Object.keys(heroes).includes(req.params.name)) {
+        heroes[req.params.name] = req.query;
+        fs.writeFileSync("./heroes.json", JSON.stringify(heroes));
+        res.status(204).send(req.query);
+        res.end();
+    } else {
+        res.status(404).end(`${req.params.name} not found.`);
+    }
+});
+
+app.delete("/heroes/:name", function removeHero(req, res) {
+    let heroes = fs.readFileSync("./heroes.json");
+    heroes = JSON.parse(heroes);
+    if (Object.keys(heroes).includes(req.params.name)) {
+        delete heroes[req.params.name];
+        fs.writeFileSync("./heroes.json", JSON.stringify(heroes));
+        res.status(204).end();
+    } else {
+        res.status(404).end(`${req.params.name} not found.`);
+    }
+    console.log(heroes);
+});
+
+app.post("/heroes", function createHero(req, res) {
+    let heroes = fs.readFileSync("./heroes.json");
+    heroes = JSON.stringify(heroes);
+    let propertyName = req.body.name.trim().split(" ").join("").toLowerCase();
+    console.log(propertyName);
+    console.log(req.body);
+    res.end();
     // TODO
-    console.log(req.headers);
-    console.log(req.query);
-    console.log(req.params);
-    res.end(JSON.stringify(req.query));
 });
 
 app.listen(PORT, function serverOnlineCallback() {
