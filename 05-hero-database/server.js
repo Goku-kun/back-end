@@ -3,37 +3,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const fs = require("fs");
 
-app.use(express.json());
+app.use(express.json()); // for populating body of POST request
 app.use(express.urlencoded({ extended: true }));
-//var heroes = {
-//deku: {
-//name: "Midoriya Izuku",
-//heroName: "Deku",
-//quirk: "One for All",
-//},
-//lemillion: {
-//name: "Mirio Togata",
-//heroName: "Lemillion",
-//quirk: "Permeation",
-//},
-//allmight: {
-//name: "Yagi Toshinori",
-//heroName: "All Might",
-//quirk: "One for All",
-//},
-//eraserhead: {
-//name: "Aizawa Shota",
-//heroName: "Eraser Head",
-//quirk: "Erasure",
-//},
-//greatexplosionmurdergoddynamite: {
-//name: "Bakugo Katsuki",
-//heroName: "greatexplosionmurdergoddynamite",
-//quirk: "Explosion",
-//},
-//};
-
-//fs.writeFileSync("./heroes.json", JSON.stringify(heroes));
 
 app.get("/heroes", function indexHandler(req, res) {
     let heroes = fs.readFileSync("./heroes.json");
