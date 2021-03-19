@@ -6,13 +6,13 @@ const { readFile, writeFile } = require("./readWriteJSON");
 app.use(express.json()); // for populating body of POST request
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/heroes", function indexHandler(req, res) {
+app.get("/heroes", function getHeroes(req, res) {
     let heroes = readFile("./heroes.json");
     res.set("Content-type", "text/json");
     res.end(heroes);
 });
 
-app.get("/heroes/:name", function heroNameHandler(req, res) {
+app.get("/heroes/:name", function getHero(req, res) {
     let heroes = readFile("./heroes.json");
     heroes = JSON.parse(heroes);
     const heroDetails = heroes[req.params.name];
@@ -27,7 +27,7 @@ app.get("/heroes/:name", function heroNameHandler(req, res) {
     res.json(heroDetails);
 });
 
-app.put("/heroes/:name", function putHero(req, res) {
+app.put("/heroes/:name", function updateHero(req, res) {
     let heroes = readFile("./heroes.json");
     heroes = JSON.parse(heroes);
     if (Object.keys(heroes).includes(req.params.name)) {
