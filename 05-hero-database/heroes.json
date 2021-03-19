@@ -1,7 +1,7 @@
 {
     "deku": {
         "name": "Midoriya Izuku",
-        "heroName": "deku",
+        "heroName": "Deku",
         "quirk": "One for All"
     },
     "lemillion": {
@@ -23,5 +23,16 @@
         "name": "Bakugo Katsuki",
         "heroName": "greatexplosionmurdergoddynamite",
         "quirk": "Explosion"
+    },
+    "sirnighteye": {
+        "name": "Sir Nighteye",
+        "heroName": "Sir Nighteye",
+        "quirk": "Foresight"
+    },
+    "shoto": {
+        "name": "Todoroki Shoto",
+        "heroName": "Shoto",
+        "quirk": "Half-Cold Half-Hot"
     }
 }
+
