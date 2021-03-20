@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 const { readFile, writeFile } = require("./readWriteJSON");
+const morgan = require("morgan");
 
 app.use(express.json()); // for populating body of POST request
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
 
 app.get("/heroes", function getHeroes(req, res) {
     let heroes = readFile("./heroes.json");

@@ -33,6 +33,16 @@
         "name": "Todoroki Shoto",
         "heroName": "Shoto",
         "quirk": "Half-Cold Half-Hot"
+    },
+    "endeavour": {
+        "name": "Enji Todoroki",
+        "heroName": "Endeavour",
+        "quirk": "Hellflame"
+    },
+    "hawks": {
+        "name": "Takami Keigo",
+        "heroName": "Hawks",
+        "quirk": "Fierce Wings"
     }
 }
 
