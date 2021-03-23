@@ -3,6 +3,8 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const { readFile, writeFile } = require("./readWriteJSON");
 const morgan = require("morgan");
+const mongoose = require("mongoose");
+var { HeroModel } = require("./connection");
 
 app.use(express.json()); // for populating body of POST request
 app.use(express.urlencoded({ extended: true }));
@@ -61,12 +63,18 @@ app.post("/heroes", function createHero(req, res) {
         .split(" ")
         .join("")
         .toLowerCase();
-    if (Object.keys(heroes).includes(propertyName)) {
+    if (Object.keys(heroes).includes(propertyName) && false) {
         res.end("hero already exists. Use PUT to modify.");
         return;
     } else {
-        heroes[propertyName] = req.body;
-        writeFile("./heroes.json", JSON.stringify(heroes));
+        var { name, heroName, quirk } = req.body;
+        HeroModel.create({
+            name: name,
+            heroName: heroName,
+            quirk: quirk,
+        });
+        //heroes[propertyName] = req.body;
+        //writeFile("./heroes.json", JSON.stringify(heroes));
         res.json(`Hero created: ${JSON.stringify(heroes[propertyName])}`);
     }
     res.end();
